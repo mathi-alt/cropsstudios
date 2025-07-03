@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>cropsstudio</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+    body {
+      background-color: black;
+      color: #00ffcc;
+      font-family: 'Press Start 2P', monospace;
+      cursor: url('https://cur.cursors-4u.net/cursors/cur-9/cur829.cur'), auto;
+      overflow: hidden;
+      margin: 0;
+      padding: 0;
+      text-shadow: 0 0 5px #00ffff, 0 0 10px #00ffff, 0 0 20px #00ffff;
+    }
+    .glitch {
+      font-size: 1.5rem;
+      position: absolute;
+      top: 20%;
+      left: 10%;
+      animation: glitch 0.5s infinite;
+      z-index: 4;
+    }
+    @keyframes glitch {
+      0% { transform: translate(0); }
+      20% { transform: translate(2px, -2px); }
+      40% { transform: translate(-2px, 2px); }
+      60% { transform: translate(2px, 2px); }
+      80% { transform: translate(-2px, -2px); }
+      100% { transform: translate(0); }
+    }
+    .hidden-link {
+      position: absolute;
+      bottom: 10%;
+      left: 5%;
+      font-size: 1rem;
+      color: transparent;
+      text-decoration: none;
+    }
+    .bg-gif {
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: -1;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      opacity: 0.15;
+      filter: contrast(150%) saturate(120%) brightness(80%) hue-rotate(10deg);
+    }
+    .vhs-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: repeating-linear-gradient(
+        to bottom,
+        rgba(0, 0, 0, 0) 0px,
+        rgba(0, 0, 0, 0) 2px,
+        rgba(0, 0, 0, 0.03) 3px,
+        rgba(0, 0, 0, 0.03) 4px
+      );
+      z-index: 2;
+      pointer-events: none;
+    }
+    .controls {
+      position: absolute;
+      bottom: 5%;
+      right: 5%;
+      z-index: 3;
+    }
+    .controls button {
+      background: black;
+      color: #00ffcc;
+      border: 2px solid #00ffcc;
+      font-family: 'Press Start 2P', monospace;
+      padding: 10px;
+      margin: 5px;
+      cursor: pointer;
+    }
+    .controls button:hover {
+      background: #00ffcc;
+      color: black;
+    }
+    .loading-screen {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: black;
+      color: #00ffcc;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Press Start 2P', monospace;
+      font-size: 1rem;
+      z-index: 999;
+      flex-direction: column;
+    }
+    .static-gif {
+      width: 200px;
+      height: auto;
+      margin-bottom: 20px;
+    }
+  </style>
+</head>
+<body>
+  <div class="loading-screen" id="loading">
+    <img class="static-gif" src="https://media.giphy.com/media/oEI9uBYSzLpBK/giphy.gif" alt="static">
+    <div>📼 Cargando cinta VHS...</div>
+    <audio id="static-sound" autoplay>
+      <source src="https://www.fesliyanstudios.com/play-mp3/387" type="audio/mpeg">
+    </audio>
+  </div>
+  <script>
+    window.addEventListener('load', () => {
+      const audio = document.getElementById('static-sound');
+      setTimeout(() => {
+        document.getElementById('loading').style.display = 'none';
+        audio.pause();
+      }, 3000);
+    });
+  </script>
+  <img src="https://media.giphy.com/media/Ju7l5y9osyymQ/giphy.gif" class="bg-gif" alt="fondo gif">
+  <div class="vhs-overlay"></div>
+  <div class="glitch">📼 cropsstudio presenta</div>
+  <a href="#" class="hidden-link" onclick="alert('Encontraste un secreto en la cinta 📼')">.</a>
+  <div class="controls">
+    <button onclick="document.getElementById('player').contentWindow.postMessage('{"event":"command","func":"playVideo","args":""}', '*')">PLAY</button>
+    <button onclick="document.getElementById('player').contentWindow.postMessage('{"event":"command","func":"pauseVideo","args":""}', '*')">STOP</button>
+  </div>
+  <iframe id="player" width="0" height="0" src="https://www.youtube.com/embed/mj4yh7YrwfE?enablejsapi=1&autoplay=1&loop=1&playlist=mj4yh7YrwfE&controls=0&mute=0" frameborder="0" allow="autoplay" allowfullscreen></iframe>
+</body>
+</html>
