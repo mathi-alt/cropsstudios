@@ -11,7 +11,7 @@
       color: #00ffcc;
       font-family: 'Press Start 2P', monospace;
       cursor: url('https://cur.cursors-4u.net/cursors/cur-9/cur829.cur'), auto;
-      overflow: hidden;
+      overflow-x: hidden;
       margin: 0;
       padding: 0;
       text-shadow: 0 0 5px #00ffff, 0 0 10px #00ffff, 0 0 20px #00ffff;
@@ -40,23 +40,23 @@
       color: transparent;
       text-decoration: none;
     }
-    .bg-gif {
+    .bg-video {
       position: fixed;
       top: 0;
       left: 0;
       z-index: -1;
-      width: 100%;
-      height: 100%;
+      width: 100vw;
+      height: 100vh;
       object-fit: cover;
-      opacity: 0.15;
+      opacity: 0.13;
       filter: contrast(150%) saturate(120%) brightness(80%) hue-rotate(10deg);
     }
     .vhs-overlay {
       position: fixed;
       top: 0;
       left: 0;
-      width: 100%;
-      height: 100%;
+      width: 100vw;
+      height: 100vh;
       background: repeating-linear-gradient(
         to bottom,
         rgba(0, 0, 0, 0) 0px,
@@ -90,8 +90,8 @@
       position: fixed;
       top: 0;
       left: 0;
-      width: 100%;
-      height: 100%;
+      width: 100vw;
+      height: 100vh;
       background: black;
       color: #00ffcc;
       display: flex;
@@ -106,6 +106,130 @@
       width: 200px;
       height: auto;
       margin-bottom: 20px;
+    }
+    nav {
+      position: sticky;
+      top: 0;
+      background: rgba(0,0,0,0.7);
+      padding: 10px 0;
+      text-align: center;
+      z-index: 10;
+      width: 100%;
+    }
+    nav a {
+      color: #00ffcc;
+      text-decoration: none;
+      margin: 0 20px;
+      font-family: 'Press Start 2P', monospace;
+      font-size: 1rem;
+      transition: color 0.2s;
+    }
+    nav a:hover {
+      color: #fff;
+    }
+    section {
+      margin: 60px auto 40px auto;
+      max-width: 900px;
+      background: rgba(0,0,0,0.7);
+      border-radius: 10px;
+      padding: 30px 20px;
+      box-shadow: 0 0 25px #00ffcc44;
+    }
+    section h2 {
+      color: #00ffcc;
+      text-align: center;
+      margin-bottom: 20px;
+      font-size: 1.3rem;
+    }
+    .prendas-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 30px;
+      justify-content: center;
+    }
+    .prenda-item {
+      background: #111;
+      border: 1.5px solid #00ffcc;
+      border-radius: 10px;
+      padding: 14px 20px;
+      min-width: 170px;
+      text-align: center;
+      font-size: 0.9rem;
+    }
+    .galeria-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      justify-content: center;
+    }
+    .galeria-grid img {
+      width: 200px;
+      border: 2px solid #00ffcc;
+      border-radius: 8px;
+      box-shadow: 0 0 18px #00ffff33;
+      margin-bottom: 10px;
+      background: #111;
+    }
+    .integrantes-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 30px;
+      justify-content: center;
+    }
+    .integrante-item {
+      border: 1.5px solid #00ffcc;
+      border-radius: 10px;
+      background: #111;
+      padding: 18px 25px;
+      min-width: 170px;
+      text-align: center;
+      font-size: 0.95rem;
+    }
+    .spotify-embed {
+      display: flex;
+      justify-content: center;
+      margin-top: 30px;
+    }
+    .contacto-form {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+      max-width: 350px;
+      margin: 0 auto;
+      color: #00ffcc;
+    }
+    .contacto-form input,
+    .contacto-form textarea {
+      font-family: 'Press Start 2P', monospace;
+      font-size: 0.8rem;
+      padding: 8px;
+      background: #181818;
+      color: #00ffcc;
+      border: 1.5px solid #00ffcc;
+      border-radius: 4px;
+      margin-bottom: 10px;
+      resize: vertical;
+    }
+    .contacto-form button {
+      background: #00ffcc;
+      color: black;
+      border: none;
+      font-family: 'Press Start 2P', monospace;
+      padding: 10px 0;
+      border-radius: 4px;
+      cursor: pointer;
+      margin-top: 10px;
+    }
+    .contacto-form button:hover {
+      background: black;
+      color: #00ffcc;
+      border: 1.5px solid #00ffcc;
+    }
+    @media (max-width: 700px) {
+      .prendas-list, .integrantes-list, .galeria-grid { flex-direction: column; align-items: center; }
+      section { padding: 13px 2vw; }
+      nav a { font-size: 0.85rem; }
+      .galeria-grid img { width: 96vw; max-width: 280px; }
     }
   </style>
 </head>
@@ -126,14 +250,101 @@
       }, 3000);
     });
   </script>
-  <img src="https://media.giphy.com/media/Ju7l5y9osyymQ/giphy.gif" class="bg-gif" alt="fondo gif">
+  <!-- Video de fondo (reemplaza src con el MP4 del reel si lo tienes) -->
+  <video class="bg-video" id="bgVideo" autoplay loop muted playsinline>
+    <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4">
+    Tu navegador no soporta videos HTML5.
+  </video>
   <div class="vhs-overlay"></div>
   <div class="glitch">📼 cropsstudio presenta</div>
   <a href="#" class="hidden-link" onclick="alert('Encontraste un secreto en la cinta 📼')">.</a>
+  <nav>
+    <a href="#prendas">Prendas</a>
+    <a href="#galeria">Galería</a>
+    <a href="#integrantes">Integrantes</a>
+    <a href="#contacto">Contacto</a>
+    <a href="#musica">Música</a>
+  </nav>
   <div class="controls">
-    <button onclick="document.getElementById('player').contentWindow.postMessage('{"event":"command","func":"playVideo","args":""}', '*')">PLAY</button>
-    <button onclick="document.getElementById('player').contentWindow.postMessage('{"event":"command","func":"pauseVideo","args":""}', '*')">STOP</button>
+    <button onclick="document.getElementById('spotify').src='https://open.spotify.com/embed/track/6IZvVAP7VPPnsGX6bvgkqg?utm_source=generator'">PLAY</button>
+    <button onclick="document.getElementById('spotify').src='about:blank'">STOP</button>
   </div>
-  <iframe id="player" width="0" height="0" src="https://www.youtube.com/embed/mj4yh7YrwfE?enablejsapi=1&autoplay=1&loop=1&playlist=mj4yh7YrwfE&controls=0&mute=0" frameborder="0" allow="autoplay" allowfullscreen></iframe>
+  <main>
+    <section id="prendas">
+      <h2>👕 Prendas</h2>
+      <div class="prendas-list">
+        <div class="prenda-item">
+          <b>Remera "Crops Studios"</b><br>
+          Edición limitada.<br>
+          Talles S-M-L-XL
+        </div>
+        <div class="prenda-item">
+          <b>Buzo Oversize</b><br>
+          Colores: Negro / Blanco
+        </div>
+        <div class="prenda-item">
+          <b>Gorra Retro</b><br>
+          Bordado exclusivo
+        </div>
+        <div class="prenda-item">
+          <b>Campera Denim</b><br>
+          Intervenido a mano
+        </div>
+      </div>
+    </section>
+    <section id="galeria">
+      <h2>📸 Galería de Fotos</h2>
+      <div class="galeria-grid">
+        <img src="https://images.unsplash.com/photo-1512436991641-6745cdb1723f?auto=format&fit=crop&w=400&q=80" alt="Foto1">
+        <img src="https://images.unsplash.com/photo-1465101046530-73398c7f28ca?auto=format&fit=crop&w=400&q=80" alt="Foto2">
+        <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=400&q=80" alt="Foto3">
+        <img src="https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=400&q=80" alt="Foto4">
+      </div>
+    </section>
+    <section id="integrantes">
+      <h2>🧑‍🤝‍🧑 Integrantes</h2>
+      <div class="integrantes-list">
+        <div class="integrante-item">
+          <b>Mathi</b><br>
+          Fundador<br>
+          Diseño y dirección
+        </div>
+        <div class="integrante-item">
+          <b>Sofi</b><br>
+          Fotografía<br>
+          Redes Sociales
+        </div>
+        <div class="integrante-item">
+          <b>Leo</b><br>
+          Producción<br>
+          Video y edición
+        </div>
+        <div class="integrante-item">
+          <b>Lau</b><br>
+          Estilismo<br>
+          Comunicación
+        </div>
+      </div>
+    </section>
+    <section id="contacto">
+      <h2>📬 Contacto</h2>
+      <form class="contacto-form" action="mailto:crospstudio@email.com" method="POST" enctype="text/plain">
+        <input type="text" name="Nombre" placeholder="Tu nombre" required>
+        <input type="email" name="Email" placeholder="Tu email" required>
+        <textarea name="Mensaje" rows="4" placeholder="Escribe tu mensaje..." required></textarea>
+        <button type="submit">Enviar</button>
+      </form>
+      <p style="text-align:center;font-size:0.7rem;margin-top:10px;">O escríbenos en <a style="color:#00ffcc" href="https://www.instagram.com/cropsstudio/" target="_blank">Instagram</a></p>
+    </section>
+    <section id="musica">
+      <h2>🎵 Música</h2>
+      <div class="spotify-embed">
+        <iframe id="spotify" style="border-radius:12px" src="https://open.spotify.com/embed/track/6IZvVAP7VPPnsGX6bvgkqg?utm_source=generator" width="320" height="80" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture"></iframe>
+      </div>
+      <p style="text-align:center;font-size:0.8rem;color:#fff;margin-top:10px;">
+        Disfruta la canción completa en <a href="https://open.spotify.com/intl-es/track/6IZvVAP7VPPnsGX6bvgkqg?si=8f1dba84ec7c4322" target="_blank" style="color:#00ffcc;">Spotify</a>
+      </p>
+    </section>
+  </main>
 </body>
 </html>
